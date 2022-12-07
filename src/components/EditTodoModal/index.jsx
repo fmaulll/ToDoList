@@ -190,6 +190,7 @@ const EditTodoModal = ({ open, onClose, handleEditTodo, data }) => {
           <Button
             data-cy="modal-add-save-button"
             onClick={handleClickEdit}
+            disabled={dataRequest.title === ""}
             sx={{
               backgroundColor: "#16ABF8",
               height: "54px",

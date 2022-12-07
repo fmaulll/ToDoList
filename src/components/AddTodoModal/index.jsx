@@ -44,13 +44,6 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
     onClose();
   };
 
-  useEffect(() => {
-    setDisabled(true);
-    if (dataRequest.title !== "" && dataRequest.priority !== "") {
-      setDisabled(false);
-    }
-  }, [dataRequest]);
-
   return (
     <Modal
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
@@ -159,7 +152,6 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
                 },
               }}
               IconComponent={ChevronDownIcon}
-              // defaultValue=""
               data-cy="modal-add-priority-dropdown"
             >
               {selectItems.map((item, index) => (
@@ -186,7 +178,7 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
           }}
         >
           <Button
-            disabled={disabled}
+            disabled={dataRequest.title === ""}
             data-cy="modal-add-save-button"
             onClick={handleClickAdd}
             sx={{
