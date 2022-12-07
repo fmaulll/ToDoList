@@ -148,9 +148,9 @@ const EditTodoModal = ({ open, onClose, handleEditTodo, data }) => {
             }}
           >
             <Select
+              data-cy="modal-add-priority-dropdown"
               value={dataRequest.priority}
               onChange={(e) => handlechange("priority", e.target.value)}
-              data-cy="modal-add-priority-dropdown"
               id="priority"
               sx={{
                 borderRadius: "6px",
@@ -165,7 +165,11 @@ const EditTodoModal = ({ open, onClose, handleEditTodo, data }) => {
               displayEmpty
             >
               {selectItems.map((item, index) => (
-                <MenuItem data-cy={`modal-add-priority-${item.test}`} key={index} value={item.value}>
+                <MenuItem
+                  data-cy="modal-add-priority-item"
+                  key={index}
+                  value={item.value}
+                >
                   <Priority severity={item.value} />
                   {item.label}
                 </MenuItem>

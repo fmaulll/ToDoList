@@ -130,7 +130,7 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
             PRIORITY
           </Typography>
           <FormControl
-            data-cy="modal-add-priority-dropdown"
+            // data-cy="modal-add-priority-dropdown"
             sx={{
               maxWidth: "205px",
               height: "52px",
@@ -139,7 +139,6 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
           >
             <Select
               onChange={(e) => handlechange("priority", e.target.value)}
-              data-cy="modal-add-priority-item"
               id="priority"
               sx={{
                 borderRadius: "6px",
@@ -153,10 +152,11 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
               defaultValue="very-high"
               IconComponent={ChevronDownIcon}
               displayEmpty
+              data-cy="modal-add-priority-dropdown"
             >
               {selectItems.map((item, index) => (
                 <MenuItem
-                  data-cy={`modal-add-priority-${item.test}`}
+                  data-cy="modal-add-priority-item"
                   key={index}
                   value={item.value}
                 >
@@ -193,9 +193,9 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
               fontWeight: 600,
               textTransform: "none",
               borderRadius: "45px",
-              "&:hover":{
+              "&:hover": {
                 backgroundColor: "#109de3",
-              }
+              },
             }}
           >
             Simpan
