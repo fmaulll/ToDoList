@@ -18,6 +18,7 @@ import DeleteModal from "../../components/DeleteModal";
 import EditTodoModal from "../../components/EditTodoModal";
 import Filter from "../../components/Filter";
 import { Box } from "@mui/system";
+import AddButtonTodo from "../../components/AddButtonTodo";
 
 const dummy = [
   {
@@ -192,9 +193,8 @@ const Detail = () => {
         <Grid item>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Filter handleSort={handleSort} />
-            <AddButton
+            <AddButtonTodo
               onClick={() => setOpenAddModal(true)}
-              data-cy="todo-add-button"
             />
           </Box>
         </Grid>
@@ -204,7 +204,7 @@ const Detail = () => {
           {data?.map((item, index) => (
             <Grid key={item.id} item xs={12}>
               <TodoItem
-                data-cy={`todo-item-${index}`}
+                data-cy={`todo-item`}
                 data={item}
                 handleCheck={handleCheck}
                 onClickDelete={(todoId, title) => {

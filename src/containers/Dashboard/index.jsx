@@ -23,9 +23,9 @@ const Loading = () => {
 };
 
 const Dashboard = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('lg'));
+  const matches = useMediaQuery(theme.breakpoints.up("lg"));
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -34,8 +34,8 @@ const Dashboard = () => {
   const [titleDelete, setTitleDelete] = useState(null);
 
   const handleClickTitle = (id) => {
-    navigate(`/detail/${id}`)
-  }
+    navigate(`/detail/${id}`);
+  };
 
   const handleAddActivity = () => {
     addActivityGroup()
@@ -94,10 +94,7 @@ const Dashboard = () => {
           </Typography>
         </Grid>
         <Grid item>
-          <AddButton
-            data-cy="activity-add-button"
-            onClick={handleAddActivity}
-          />
+          <AddButton onClick={handleAddActivity} />
         </Grid>
       </Grid>
       {isLoading ? (
@@ -109,14 +106,13 @@ const Dashboard = () => {
               {data.map((item, index) => (
                 <Grid key={item.id + index} item xs={matches ? 3 : 6}>
                   <ActivityItem
-                    data-cy={`activity-item-${index}`}
                     data={item}
                     onClickDelete={() => {
                       setOpenModal(true);
                       setIdDelete(item.id);
                       setTitleDelete(item.title);
                     }}
-                    onClickTitle={()=>handleClickTitle(item.id)}
+                    onClickTitle={() => handleClickTitle(item.id)}
                   />
                 </Grid>
               ))}
@@ -150,7 +146,7 @@ const Dashboard = () => {
       <SuccessDelete
         open={openSuccess}
         onClose={() => {
-          setOpenSuccess(false)
+          setOpenSuccess(false);
           getActivityGroupApi();
         }}
       />

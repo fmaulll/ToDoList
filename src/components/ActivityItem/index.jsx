@@ -16,20 +16,21 @@ const ActivityItem = ({ data, onClickTitle, onClickDelete }) => {
         flexDirection: "column",
       }}
     >
-      <Typography
-        data-cy="activity-item-title"
-        onClick={onClickTitle}
-        sx={{
-          fontSize: "18px",
-          fontWeight: 700,
-          lineHeight: "27px",
-          color: "#111111",
-          cursor: "pointer",
-          fontFamily: "'Poppins', sans-serif",
-        }}
-      >
-        {data.title}
-      </Typography>
+      <Box data-cy={`activity-item`} onClick={onClickTitle}>
+        <Typography
+          data-cy="activity-item-title"
+          sx={{
+            fontSize: "18px",
+            fontWeight: 700,
+            lineHeight: "27px",
+            color: "#111111",
+            cursor: "pointer",
+            fontFamily: "'Poppins', sans-serif",
+          }}
+        >
+          {data.title}
+        </Typography>
+      </Box>
       <Box
         sx={{
           display: "flex",

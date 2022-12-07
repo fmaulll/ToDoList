@@ -2,10 +2,10 @@ import { Button } from "@mui/material";
 import React from "react";
 import { ReactComponent as AddIcon } from "../../assets/Add.svg";
 
-const AddButton = ({ onClick }) => {
+const AddButtonTodo = ({ onClick }) => {
   return (
     <Button
-      data-cy="activity-add-button"
+      data-cy="todo-add-button"
       onClick={onClick}
       sx={{
         backgroundColor: "#16ABF8",
@@ -31,4 +31,4 @@ const AddButton = ({ onClick }) => {
   );
 };
 
-export default AddButton;
+export default AddButtonTodo;
