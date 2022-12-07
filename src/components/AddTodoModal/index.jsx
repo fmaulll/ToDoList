@@ -22,13 +22,23 @@ const selectItems = [
   { label: "Very Low", value: "very-low", test: "very-low" },
 ];
 
-const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
-  const [disabled, setDisabled] = useState(false);
-  const [dataRequest, setDataRequest] = useState({
-    activity_group_id: "",
-    title: "",
-    priority: "",
-  });
+const defaultValue = {
+  id: "",
+  activity_group_id: "",
+  is_active: "",
+  title: "",
+  priority: "normal",
+};
+
+const AddTodoModal = ({
+  open,
+  onClose,
+  handleAddTodo,
+  handleEditTodo,
+  type,
+  data,
+}) => {
+  const [dataRequest, setDataRequest] = useState(data);
 
   const handlechange = (key, value) => {
     setDataRequest((prev) => {
@@ -40,9 +50,27 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
   };
 
   const handleClickAdd = () => {
-    handleAddTodo(dataRequest);
+    if (type === "add") {
+      handleAddTodo({
+        title: dataRequest.title,
+        priority: dataRequest.priority,
+      });
+    } else {
+      handleEditTodo(dataRequest);
+    }
+    setDataRequest(defaultValue);
     onClose();
   };
+
+  useEffect(() => {
+    setDataRequest({
+      id: data.id,
+      is_active: data.is_active,
+      title: data.title,
+      priority: data.priority,
+    });
+    console.log("rendered");
+  }, [data, type]);
 
   return (
     <Modal
@@ -53,6 +81,7 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
       <Box
         data-cy="modal-add"
         sx={{
+          border: "none",
           width: "830px",
           height: "403px",
           borderRadius: "12px",
@@ -82,7 +111,7 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
               color: "#111111",
             }}
           >
-            Tambah List Item
+            {type === "add" ? "Tambah List Item" : "Edit List Item"}
           </Typography>
           <IconButton data-cy="modal-add-close-button" onClick={onClose}>
             <CrossIcon />
@@ -105,6 +134,7 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
             NAMA LIST ITEM
           </Typography>
           <OutlinedInput
+            value={dataRequest.title}
             data-cy="modal-add-name-input"
             onChange={(e) => handlechange("title", e.target.value)}
             sx={{
@@ -177,12 +207,11 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
             borderTop: "1px solid #E5E5E5",
           }}
         >
-          <button
+          <Button
             disabled={dataRequest.title === ""}
             data-cy="modal-add-save-button"
             onClick={handleClickAdd}
-            style={{
-              border:"none",
+            sx={{
               backgroundColor: "#16ABF8",
               height: "54px",
               width: "159px",
@@ -201,7 +230,7 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
             }}
           >
             Simpan
-          </button>
+          </Button>
         </Box>
       </Box>
     </Modal>

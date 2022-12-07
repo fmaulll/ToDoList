@@ -15,7 +15,6 @@ import {
 import TodoItem from "../../components/TodoItem";
 import AddTodoModal from "../../components/AddTodoModal";
 import DeleteModal from "../../components/DeleteModal";
-import EditTodoModal from "../../components/EditTodoModal";
 import Filter from "../../components/Filter";
 import { Box } from "@mui/system";
 import AddButtonTodo from "../../components/AddButtonTodo";
@@ -45,6 +44,14 @@ const dummy = [
   },
 ];
 
+const defaultValue = {
+  id: "",
+  activity_group_id: "",
+  is_active: "",
+  title: "",
+  priority: "normal",
+};
+
 const Detail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -56,6 +63,7 @@ const Detail = () => {
   const [dataTodo, setDataTodo] = useState({ id: "", title: "", priority: "" });
   const [activityTitle, setActivityTitle] = useState("");
   const [openSuccess, setOpenSuccess] = useState(false);
+  const [type, setType] = useState("");
 
   const handleClickBack = () => {
     navigate(-1);
@@ -196,7 +204,12 @@ const Detail = () => {
         <Grid item>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Filter handleSort={handleSort} />
-            <AddButtonTodo onClick={() => setOpenAddModal(true)} />
+            <AddButtonTodo
+              onClick={() => {
+                setOpenAddModal(true);
+                setType("add");
+              }}
+            />
           </Box>
         </Grid>
       </Grid>
@@ -219,7 +232,8 @@ const Detail = () => {
                     priority: item.priority,
                     is_active: item.is_active,
                   });
-                  setOpenEditModal(true);
+                  setOpenAddModal(true);
+                  setType("edit");
                 }}
               />
             </Grid>
@@ -241,12 +255,9 @@ const Detail = () => {
         open={openAddModal}
         onClose={() => setOpenAddModal(false)}
         handleAddTodo={handleAddTodo}
-      />
-      <EditTodoModal
-        open={openEditModal}
-        onClose={() => setOpenEditModal(false)}
         handleEditTodo={handleEditTodo}
-        data={dataTodo}
+        type={type}
+        data={type === "add" ? defaultValue : dataTodo}
       />
       <DeleteModal
         type="List Item"
