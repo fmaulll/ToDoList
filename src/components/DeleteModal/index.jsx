@@ -82,6 +82,9 @@ const DeleteModal = ({ open, onClose, onClickDelete, title, type }) => {
               fontWeight: 600,
               textTransform: "none",
               borderRadius: "45px",
+              "&:hover": {
+                backgroundColor: "#c23e4b",
+              }
             }}
           >
             Hapus

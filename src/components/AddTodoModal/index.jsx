@@ -196,6 +196,9 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
               fontWeight: 600,
               textTransform: "none",
               borderRadius: "45px",
+              "&:hover":{
+                backgroundColor: "#109de3",
+              }
             }}
           >
             Simpan

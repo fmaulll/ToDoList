@@ -19,6 +19,9 @@ const AddButton = ({ onClick }) => {
         fontWeight: 600,
         textTransform: "none",
         borderRadius: "45px",
+        "&:hover":{
+          backgroundColor: "#109de3",
+        },
       }}
     >
       <AddIcon style={{ marginRight: "11px" }} />
