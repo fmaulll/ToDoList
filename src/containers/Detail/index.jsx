@@ -187,6 +187,7 @@ const Detail = () => {
       <Grid container justifyContent="space-between">
         <Grid item>
           <TodoTitle
+            id={id}
             title={activityTitle}
             handleEdit={handleEditTitle}
             onClickBack={handleClickBack}

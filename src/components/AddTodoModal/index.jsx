@@ -27,7 +27,7 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
   const [dataRequest, setDataRequest] = useState({
     activity_group_id: "",
     title: "",
-    priority: "very-high",
+    priority: "",
   });
 
   const handlechange = (key, value) => {
@@ -46,10 +46,10 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
 
   useEffect(() => {
     setDisabled(true);
-    if (dataRequest.title !== "") {
+    if (dataRequest.title !== "" && dataRequest.priority !== "") {
       setDisabled(false);
     }
-  }, [dataRequest.title]);
+  }, [dataRequest]);
 
   return (
     <Modal
@@ -139,7 +139,6 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
             PRIORITY
           </Typography>
           <FormControl
-            // data-cy="modal-add-priority-dropdown"
             sx={{
               maxWidth: "205px",
               height: "52px",
@@ -160,7 +159,7 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
                 },
               }}
               IconComponent={ChevronDownIcon}
-              // displayEmpty
+              // defaultValue=""
               data-cy="modal-add-priority-dropdown"
             >
               {selectItems.map((item, index) => (
