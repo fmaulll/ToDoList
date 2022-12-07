@@ -62,7 +62,8 @@ const Filter = ({ handleSort }) => {
       >
         {filterItem.map((item, index) => (
           <MenuItem
-            data-cy={`sort-${item.key}`}
+            // data-cy={`sort-${item.key}`}
+            data-cy={`sort-selection`}
             key={index}
             onClick={() => {
               handleSort(item.key);

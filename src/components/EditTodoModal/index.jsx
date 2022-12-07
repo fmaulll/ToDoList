@@ -168,7 +168,7 @@ const EditTodoModal = ({ open, onClose, handleEditTodo, data }) => {
                 Pilih priority
               </MenuItem>
               {selectItems.map((item, index) => (
-                <MenuItem key={index} value={item.value}>
+                <MenuItem data-cy={`modal-add-priority-${item.test}`} key={index} value={item.value}>
                   <Priority severity={item.value} />
                   {item.label}
                 </MenuItem>
