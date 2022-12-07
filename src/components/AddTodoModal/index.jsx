@@ -9,7 +9,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ReactComponent as CrossIcon } from "../../assets/Cross.svg";
 import { ReactComponent as ChevronDownIcon } from "../../assets/ChevronDown.svg";
 import Priority from "../Priority";
@@ -23,10 +23,11 @@ const selectItems = [
 ];
 
 const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
+  const [disabled, setDisabled] = useState(false);
   const [dataRequest, setDataRequest] = useState({
     activity_group_id: "",
     title: "",
-    priority: "",
+    priority: "very-high",
   });
 
   const handlechange = (key, value) => {
@@ -42,6 +43,14 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
     handleAddTodo(dataRequest);
     onClose();
   };
+
+  useEffect(() => {
+    setDisabled(true);
+    if (dataRequest.title !== "") {
+      setDisabled(false);
+    }
+  }, [dataRequest.title]);
+
   return (
     <Modal
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
@@ -139,6 +148,7 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
           >
             <Select
               onChange={(e) => handlechange("priority", e.target.value)}
+              value={dataRequest.priority}
               id="priority"
               sx={{
                 borderRadius: "6px",
@@ -149,9 +159,8 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
                   flexDirection: "row",
                 },
               }}
-              defaultValue="very-high"
               IconComponent={ChevronDownIcon}
-              displayEmpty
+              // displayEmpty
               data-cy="modal-add-priority-dropdown"
             >
               {selectItems.map((item, index) => (
@@ -178,6 +187,7 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
           }}
         >
           <Button
+            disabled={disabled}
             data-cy="modal-add-save-button"
             onClick={handleClickAdd}
             sx={{

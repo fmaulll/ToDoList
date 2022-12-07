@@ -19,6 +19,7 @@ import EditTodoModal from "../../components/EditTodoModal";
 import Filter from "../../components/Filter";
 import { Box } from "@mui/system";
 import AddButtonTodo from "../../components/AddButtonTodo";
+import SuccessDelete from "../../components/SuccessDelete";
 
 const dummy = [
   {
@@ -54,6 +55,7 @@ const Detail = () => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [dataTodo, setDataTodo] = useState({ id: "", title: "", priority: "" });
   const [activityTitle, setActivityTitle] = useState("");
+  const [openSuccess, setOpenSuccess] = useState(false);
 
   const handleClickBack = () => {
     navigate(-1);
@@ -126,7 +128,7 @@ const Detail = () => {
     deleteTodoList(dataTodo.id)
       .then((response) => {
         if (response) {
-          getDetailActivityApi();
+          setOpenSuccess(true);
           setIsLoading(false);
         }
       })
@@ -193,9 +195,7 @@ const Detail = () => {
         <Grid item>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Filter handleSort={handleSort} />
-            <AddButtonTodo
-              onClick={() => setOpenAddModal(true)}
-            />
+            <AddButtonTodo onClick={() => setOpenAddModal(true)} />
           </Box>
         </Grid>
       </Grid>
@@ -257,6 +257,13 @@ const Detail = () => {
         onClickDelete={() => {
           setOpenDeleteModal(false);
           handleDeleteTodo();
+        }}
+      />
+      <SuccessDelete
+        open={openSuccess}
+        onClose={() => {
+          setOpenSuccess(false);
+          getDetailActivityApi();
         }}
       />
     </div>
