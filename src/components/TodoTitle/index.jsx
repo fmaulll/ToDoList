@@ -2,6 +2,7 @@ import { Grid, IconButton, InputBase, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { ReactComponent as BackIcon } from "../../assets/Back.svg";
 import { ReactComponent as PenIcon } from "../../assets/Pen.svg";
+import { OutsideWrapper } from "../OutsideWrapper";
 
 const TodoTitle = ({ onClickBack, handleEdit, title }) => {
   const inputTitle = useRef(null);
@@ -27,28 +28,28 @@ const TodoTitle = ({ onClickBack, handleEdit, title }) => {
   return (
     <Grid container alignItems="center">
       <Grid item sx={{ marginRight: "20px" }}>
-        <IconButton
-          onClick={onClickBack}
-          data-cy="todo-back-button"
-        >
+        <IconButton onClick={onClickBack} data-cy="todo-back-button">
           <BackIcon />
         </IconButton>
       </Grid>
       <Grid item sx={{ marginRight: "20px" }}>
         {isEdit ? (
-          <InputBase
-            ref={inputTitle}
-            data-cy="todo-title"
-            sx={{
-              borderBottom: "2px solid #111111",
-              fontSize: "36px",
-              fontFamily: "'Poppins', sans-serif",
-              fontWeight: 700,
-              color: "#111111",
-            }}
-            value={todoTitle}
-            onChange={handleChangeTitle}
-          />
+          <OutsideWrapper callback={()=>setIsEdit(false)}>
+            <InputBase
+              autoFocus
+              ref={inputTitle}
+              data-cy="todo-title"
+              sx={{
+                borderBottom: "2px solid #111111",
+                fontSize: "36px",
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: 700,
+                color: "#111111",
+              }}
+              value={todoTitle}
+              onChange={handleChangeTitle}
+            />
+          </OutsideWrapper>
         ) : (
           <Typography
             onClick={() => setIsEdit(true)}
@@ -65,10 +66,7 @@ const TodoTitle = ({ onClickBack, handleEdit, title }) => {
         )}
       </Grid>
       <Grid item>
-        <IconButton
-          onClick={handleClickEdit}
-          data-cy="todo-title-edit-button"
-        >
+        <IconButton onClick={handleClickEdit} data-cy="todo-title-edit-button">
           <PenIcon />
         </IconButton>
       </Grid>

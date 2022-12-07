@@ -150,13 +150,10 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
                   flexDirection: "row",
                 },
               }}
-              defaultValue=""
+              defaultValue="very-high"
               IconComponent={ChevronDownIcon}
               displayEmpty
             >
-              <MenuItem disabled value="">
-                Pilih priority
-              </MenuItem>
               {selectItems.map((item, index) => (
                 <MenuItem
                   data-cy={`modal-add-priority-${item.test}`}

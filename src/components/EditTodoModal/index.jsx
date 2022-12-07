@@ -164,9 +164,6 @@ const EditTodoModal = ({ open, onClose, handleEditTodo, data }) => {
               IconComponent={ChevronDownIcon}
               displayEmpty
             >
-              <MenuItem disabled value="">
-                Pilih priority
-              </MenuItem>
               {selectItems.map((item, index) => (
                 <MenuItem data-cy={`modal-add-priority-${item.test}`} key={index} value={item.value}>
                   <Priority severity={item.value} />
