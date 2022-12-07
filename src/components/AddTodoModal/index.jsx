@@ -177,11 +177,12 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
             borderTop: "1px solid #E5E5E5",
           }}
         >
-          <Button
+          <button
             disabled={dataRequest.title === ""}
             data-cy="modal-add-save-button"
             onClick={handleClickAdd}
-            sx={{
+            style={{
+              border:"none",
               backgroundColor: "#16ABF8",
               height: "54px",
               width: "159px",
@@ -200,7 +201,7 @@ const AddTodoModal = ({ open, onClose, handleAddTodo }) => {
             }}
           >
             Simpan
-          </Button>
+          </button>
         </Box>
       </Box>
     </Modal>

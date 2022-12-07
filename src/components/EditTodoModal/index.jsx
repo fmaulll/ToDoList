@@ -187,11 +187,12 @@ const EditTodoModal = ({ open, onClose, handleEditTodo, data }) => {
             borderTop: "1px solid #E5E5E5",
           }}
         >
-          <Button
+          <button
             data-cy="modal-add-save-button"
             onClick={handleClickEdit}
             disabled={dataRequest.title === ""}
-            sx={{
+            style={{
+              border:"none",
               backgroundColor: "#16ABF8",
               height: "54px",
               width: "159px",
@@ -207,7 +208,7 @@ const EditTodoModal = ({ open, onClose, handleEditTodo, data }) => {
             }}
           >
             Simpan
-          </Button>
+          </button>
         </Box>
       </Box>
     </Modal>
